@@ -1,0 +1,4 @@
+<launch>
+    <include file="$(find car_multi)/launch/slam.launch"/>
+    <include file="$(find car_multi)/launch/path.launch"/>
+</launch>

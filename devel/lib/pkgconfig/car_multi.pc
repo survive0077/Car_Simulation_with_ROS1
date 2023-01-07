@@ -1,0 +1,8 @@
+prefix=/home/yxj/code/car_ws/devel
+
+Name: car_multi
+Description: Description of car_multi
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

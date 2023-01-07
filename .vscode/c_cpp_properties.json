@@ -1,0 +1,40 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/yxj/code/ros1_try/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/yxj/code/ros1_try/src/action/include/**",
+        "/home/yxj/code/ros1_try/src/c_head/include/**",
+        "/home/yxj/code/ros1_try/src/c_head_main/include/**",
+        "/home/yxj/code/ros1_try/src/helloworld/include/**",
+        "/home/yxj/code/ros1_try/src/launch_basic/include/**",
+        "/home/yxj/code/ros1_try/src/param_server/include/**",
+        "/home/yxj/code/ros1_try/src/pub_sub/include/**",
+        "/home/yxj/code/ros1_try/src/reconfigure_dynamic/include/**",
+        "/home/yxj/code/ros1_try/src/rename_topic/include/**",
+        "/home/yxj/code/ros1_try/src/ser_cli/include/**",
+        "/home/yxj/code/ros1_try/src/set_param_name/include/**",
+        "/home/yxj/code/ros1_try/src/test_turtle/include/**",
+        "/home/yxj/code/ros1_try/src/tf_dynamic/include/**",
+        "/home/yxj/code/ros1_try/src/tf_multi/include/**",
+        "/home/yxj/code/ros1_try/src/tf_static/include/**",
+        "/home/yxj/code/ros1_try/src/try_api/include/**",
+        "/home/yxj/code/ros1_try/src/try_rosbag/include/**",
+        "/home/yxj/code/ros1_try/src/turtle_follow/include/**",
+        "/home/yxj/code/ros1_try/src/use_msg/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
