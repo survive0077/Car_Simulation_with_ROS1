@@ -7,10 +7,10 @@ int main(int argc, char *argv[])
 {
     ros::init(argc, argv, "true_pose_publisher");
     ros::NodeHandle nh;
-    // 获取机器人名字，argv第2个
+    // 获取小车名字，argv第2个
     std::string robot_name = argv[1];
     nh.param<std::string>("robot_name", robot_name);
-    // 用于发布机器人真实坐标
+    // 用于发布小车真实坐标
     ros::Publisher pose_publisher=nh.advertise<geometry_msgs::PoseStamped>("true_pose",10);
     // 用于获得真实坐标
     ros::ServiceClient client=nh.serviceClient<gazebo_msgs::GetModelState>("/gazebo/get_model_state");
@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     while(ros::ok())
     {
         gazebo_msgs::GetModelState srv;
-        // 指定要获取的机器人在gazebo中的名字
+        // 指定要获取的小车在gazebo中的名字
         srv.request.model_name = robot_name;
         if (client.call(srv))
         {
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
         }
         else
         {
-            ROS_ERROR("Failed to call service /gazebo/get_model_state");
+            ROS_WARN("Failed to call service /gazebo/get_model_state");
         }
         rate.sleep();
     }
