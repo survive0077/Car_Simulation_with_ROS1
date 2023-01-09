@@ -1,8 +1,0 @@
-prefix=/home/yxj/code/car_ws/devel
-
-Name: yahboom_car_gazebo
-Description: Description of yahboom_car_gazebo
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

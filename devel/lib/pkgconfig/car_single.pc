@@ -1,8 +1,0 @@
-prefix=/home/yxj/code/car_ws/devel
-
-Name: car_single
-Description: Description of car_single
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

@@ -15,6 +15,12 @@
         <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find car_multi)/urdf/car.xacro' ns:=$(arg ns)"/>
         <!-- <param name="robot_description" textfile="$(find car_multi)/urdf/car.urdf"/> -->
         <node pkg="rostopic" type="rostopic" name="fake_joint_calibration" args="pub /calibrated std_msgs/Bool true"/>
+        
+        <!-- 从gazebo获取小车的pose信息并发送 -->
+        <node pkg="follow_bahavior" type="pub_car_pose" name="pub_car_pose" args="$(arg ns)"/>
+        <!-- 发送小车的tf信息 -->
+        <node pkg="follow_bahavior" type="pub_car_tf" name="pub_car_tf" args="$(arg ns)"/>
+
         <!-- 防止小车base_footpoint与base_link分离 -->
         <node pkg="tf2_ros" type="static_transform_publisher" name="tf_footprint_base" args="0 0 0 0 0 0 base_link base_footprint"/>
         <!-- base_footpoint坐标变换到map并广播 -->
@@ -29,6 +35,14 @@
         <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find car_multi)/urdf/car.xacro' ns:=$(arg ns)"/>
         <!-- <param name="robot_description" textfile="$(find car_multi)/urdf/car.urdf"/> -->
         <node pkg="rostopic" type="rostopic" name="fake_joint_calibration" args="pub /calibrated std_msgs/Bool true"/>
+        
+        <!-- 从gazebo获取小车的pose信息并发送 -->
+        <node pkg="follow_bahavior" type="pub_car_pose" name="pub_car_pose" args="$(arg ns)"/>
+        <!-- 发送小车的tf信息 -->
+        <node pkg="follow_bahavior" type="pub_car_tf" name="pub_car_tf" args="$(arg ns)"/>
+        <!-- 跟驰行为 -->
+        <node pkg="follow_bahavior" type="car_follow" name="car_follow" args="$(arg ns) car1"/>
+
         <!-- 防止小车base_footpoint与base_link分离 -->
         <node pkg="tf2_ros" type="static_transform_publisher" name="tf_footprint_base" args="0 0 0 0 0 0 base_link base_footprint"/>
         <!-- base_footpoint坐标变换到map并广播 -->
@@ -43,6 +57,14 @@
         <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find car_multi)/urdf/car.xacro' ns:=$(arg ns)"/>
         <!-- <param name="robot_description" textfile="$(find car_multi)/urdf/car.urdf"/> -->
         <node pkg="rostopic" type="rostopic" name="fake_joint_calibration" args="pub /calibrated std_msgs/Bool true"/>
+        
+        <!-- 从gazebo获取小车的pose信息并发送 -->
+        <node pkg="follow_bahavior" type="pub_car_pose" name="pub_car_pose" args="$(arg ns)"/>
+        <!-- 发送小车的tf信息 -->
+        <node pkg="follow_bahavior" type="pub_car_tf" name="pub_car_tf" args="$(arg ns)"/>
+        <!-- 跟驰行为 -->
+        <node pkg="follow_bahavior" type="car_follow" name="car_follow" args="$(arg ns) car2"/>
+
         <!-- 防止小车base_footpoint与base_link分离 -->
         <node pkg="tf2_ros" type="static_transform_publisher" name="tf_footprint_base" args="0 0 0 0 0 0 base_link base_footprint"/>
         <!-- base_footpoint坐标变换到map并广播 -->
