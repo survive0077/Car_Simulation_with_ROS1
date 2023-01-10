@@ -121,14 +121,15 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/follow_bahavior.cpp
-# )
+add_library(model
+  SHARED
+  src/model.cpp
+)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -141,6 +142,7 @@ include_directories(
 add_executable(car_follow src/car_follow.cpp)
 add_executable(pub_car_pose src/pub_car_pose.cpp)
 add_executable(pub_car_tf src/pub_car_tf.cpp)
+add_executable(pub_v src/pub_v.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -153,15 +155,20 @@ add_executable(pub_car_tf src/pub_car_tf.cpp)
 add_dependencies(car_follow ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(pub_car_pose ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(pub_car_tf ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(pub_v ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(car_follow
   ${catkin_LIBRARIES}
+  model
 )
 target_link_libraries(pub_car_pose
   ${catkin_LIBRARIES}
 )
 target_link_libraries(pub_car_tf
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(pub_v
   ${catkin_LIBRARIES}
 )
 

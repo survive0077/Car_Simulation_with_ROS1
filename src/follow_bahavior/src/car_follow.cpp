@@ -6,6 +6,8 @@
 #include"geometry_msgs/TransformStamped.h"
 #include"geometry_msgs/Twist.h"
 #include<iostream>
+#include"follow_bahavior/model.h"
+
 
 
 int main(int argc, char *argv[])
@@ -18,8 +20,14 @@ int main(int argc, char *argv[])
     // 设置父节点和子节点
     std::string father = argv[1];
     std::string child = argv[2];
-
-    ros::Rate rate(10);
+    // 发布频率，Hz
+    int rate_Hz = 10;
+    ros::Rate rate(rate_Hz);
+    // 后车初始速度为0，若为GM模型则必须不为0否则无法启动！
+    double v_after = 0;
+    // 前车速度
+    double v_front;
+    
     while (ros::ok())
     {
         try
@@ -37,11 +45,21 @@ int main(int argc, char *argv[])
             //         tfs.transform.rotation.y,
             //         tfs.transform.rotation.z,
             //         tfs.transform.rotation.w);
+            // 从参数服务器获取前车速度
+            nh.getParam("/" + child + "/vel", v_front);
+            ROS_INFO("The speed of %s is %.2f", child.c_str(), v_front);
             geometry_msgs::Twist twist;
             // 小车只有线速度的xy和角速度的z，为简化问题不考虑麦克纳姆轮的y
-            twist.linear.x = 0.5 * sqrt(pow(tfs.transform.translation.x, 2) + pow(tfs.transform.translation.y, 2));
-            twist.angular.z = 4 * atan2(tfs.transform.translation.y, tfs.transform.translation.x);
+            double s = sqrt(pow(tfs.transform.translation.x, 2) + pow(tfs.transform.translation.y, 2));
+            // GM模型
+            //v_after = model::GM_Model(s, v_front, v_after, 1, 1, rate_Hz); 
+            // IDM模型
+            v_after = model::IDM_Model(s, v_front, v_after, rate_Hz);
 
+            twist.linear.x = v_after;
+            twist.angular.z = 4 * atan2(tfs.transform.translation.y, tfs.transform.translation.x);
+            // 向参数服务器载入当前车下一秒的速度
+            nh.setParam("/" + father + "/vel", v_after);
             pub.publish(twist);
         }
         catch(const std::exception& e)
